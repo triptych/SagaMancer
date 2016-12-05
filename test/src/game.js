@@ -5,9 +5,11 @@ window.onload = function(){
     var tileSize = 80;
     playGame.prototype = {
         create: function(){
-            console.log("That's my awesome game.");
+            console.log("in create");
+            game.add.image(0,0,"tiles");
         },
         preload: function(){
+            console.log("in preload")
             game.load.spritesheet("tiles", "tiles3.png", tileSize, tileSize);
         }
     }
