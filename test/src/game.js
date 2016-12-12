@@ -1,3 +1,4 @@
+/* global Phaser */
 console.log("game.js loading");
 window.addEventListener("load", function(){
   console.log("window load called");
@@ -9,7 +10,7 @@ window.addEventListener("load", function(){
   var selectedArray = [];
 
   var game = new Phaser.Game(500,500);
-  var playGame = function(game){}
+  var playGame = function(game){};
   playGame.prototype = {
     preload: function(){
       console.log("in preload");
@@ -39,7 +40,7 @@ window.addEventListener("load", function(){
       }
 
 
-      for(var i=0; i < numCols; i++){
+      for(i=0; i < numCols; i++){
         for (var j=0; j<numRows; j++){
 
           var tile = game.add.button(
@@ -77,8 +78,30 @@ window.addEventListener("load", function(){
       selectedArray.length = 0;
 
     }
-  }
+  };
+  
+  var titleScreen = function(){};
+  titleScreen.prototype={
+    preload: function(){
+        game.load.spritesheet("soundicons", "soundicons.png", 80, 80);
+    },
+    create: function(){
+        var style = {
+            font: "48px Monospace",
+            fill: "#00ff00",
+            align: "center"
+        };
+        var text = game.add.text(
+            game.width / 2, 
+            game.height / 2 - 100,
+            "Crack Alien Code",
+            style
+            );
+    }
+  };
 
-  game.state.add("Playgame", playGame);
-  game.state.start("Playgame");
+
+    game.state.add("TitleScreen", titleScreen);    
+    game.state.add("Playgame", playGame);
+    game.state.start("TitleScreen");
 });
